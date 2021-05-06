@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' integrity='sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==' crossorigin='anonymous'/>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Vue Todolist</title>
+</head>
+<body>
+  
+
+  <!-- app-container -->
+  <div id="app" class="container">
+
+    <!-- logo-bool -->
+    <div class="logo-img">
+      <img :src="logoBool" alt="Logo Boolean">
+    </div>
+    <!-- /logo-bool -->
+
+    <!-- todo-alert -->
+    <div class="todo-alert">
+      <h4 class="input-alert" v-if="alertActive">Attenzione! devi inserire un parametro!</h4>
+      <input 
+        type="text" 
+        placeholder="Inserisci un nuovo todo"
+        v-model="strTodo"
+        @keyup.enter="addTodo"
+      >
+      <button @click="addTodo">Aggiungi alla lista</button>
+    </div> 
+    <!-- /todo-alert -->
+
+    <!-- list-todo -->
+    <div class="list-todo">
+      <ul>
+        <li
+          v-for="(todo, index) in todos"
+          :class="todo.checked ? 'checked' : null"
+          @click="todo.checked = !todo.checked"
+        >
+          {{todo.todo}}
+          <h4 v-if="todo.alertActivities" class="list-alert">Attenzione! devi prima completare l'attività!</h4>
+          <i 
+            class="fas fa-times"
+            @click.stop="(todo.checked) ? removeTodo(index) : notCheckedAlert(index)"
+          ></i>
+        </li>
+      </ul>
+    </div> 
+    <!-- /list-todo -->
+
+  </div>
+  <!-- /app-container -->
+
+
+  <script src="js/script.js"></script>
+</body>
+</html>
